@@ -1,0 +1,109 @@
+---
+// Newsletter subscribe — Buttondown embed (turbulentpriest), house-styled.
+// The form POSTs to Buttondown and opens the confirmation in a new tab, so the
+// reader stays on the site. (An inline-AJAX version is a later upgrade.)
+---
+<section class="subscribe">
+  <div class="subscribe-inner">
+    <h2>Subscribe</h2>
+    <p>New writing in your inbox. No noise, no schedule.</p>
+    <form
+      action="https://buttondown.com/api/emails/embed-subscribe/turbulentpriest"
+      method="post"
+      class="subscribe-form"
+      target="_blank"
+    >
+      <input
+        type="email"
+        name="email"
+        id="bd-email"
+        aria-label="Enter your email"
+        placeholder="you@example.com"
+        required
+      />
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="subscribe-credit">
+      <a href="https://buttondown.com/refer/turbulentpriest" target="_blank" rel="noopener">
+        Powered by Buttondown
+      </a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .subscribe {
+    border-top: 1px solid var(--line);
+    margin-top: 3rem;
+  }
+  .subscribe-inner {
+    max-width: 46em;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 1rem;
+    text-align: center;
+  }
+  .subscribe h2 {
+    font-family: var(--font-family-sans);
+    font-size: 1.15rem;
+    color: var(--text-main);
+    border: none;
+    margin: 0 0 0.3rem;
+    padding: 0;
+  }
+  .subscribe > .subscribe-inner > p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin: 0 0 1.2rem;
+    line-height: 1.5;
+  }
+  .subscribe-form {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 26rem;
+  }
+  .subscribe-form input[type='email'] {
+    flex: 1 1 14rem;
+    font-family: var(--font-family-sans);
+    font-size: 1rem;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--background-body);
+    color: var(--text-main);
+  }
+  .subscribe-form input[type='email']:focus {
+    outline: none;
+    border-color: var(--link);
+    box-shadow: 0 0 0 3px rgba(0, 85, 170, 0.12);
+  }
+  .subscribe-form button {
+    font-family: var(--font-family-sans);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.55rem 1.15rem;
+    border: 1px solid var(--text-main);
+    border-radius: 4px;
+    background: var(--text-main);
+    color: var(--background-body);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .subscribe-form button:hover {
+    background: var(--background-body);
+    color: var(--text-main);
+  }
+  .subscribe-credit {
+    margin: 0.9rem 0 0;
+    font-size: 0.72rem;
+  }
+  .subscribe-credit a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+  .subscribe-credit a:hover {
+    color: var(--text-main);
+  }
+</style>

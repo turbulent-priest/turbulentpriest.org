@@ -1,141 +1,303 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
-
+/* Switchboard house style — stark, editorial, one dark-red accent held in
+   reserve. Serif reads (Hoefler → Georgia), sans is the furniture (Graublau
+   Web). Light is stark #FFF/#000; dark is the same restraint inverted. */
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+  --background-body: #fff;      /* stark white */
+  --text-main: #000;            /* stark black */
+  --text-secondary: #777;
+  --primary-color: #8b0000;     /* house dark-red accent */
+  --link: #0055aa;
+  --visited: #663366;
+  --line: #e0e0e0;
+  --font-family-serif: 'Hoefler Text', Georgia, 'Times New Roman', serif;
+  --font-family-sans: 'Graublau Web', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-mono: 'Fira Mono', ui-monospace, Menlo, Consolas, monospace;
+  /* theme-toggle chrome */
+  --theme-accent: #8b0000;
+  --theme-code-inline-bg: #f4f4f4;
+  --theme-code-inline-text: #555;
 }
+
+:root.theme-dark {
+  --background-body: #0d0d0d;   /* near-stark black */
+  --text-main: #f0f0f0;
+  --text-secondary: #999;
+  --primary-color: #c9564e;     /* dark-red, legible on black */
+  --link: #6fa8dc;
+  --visited: #b79bc9;
+  --line: #3a3a3a;
+  --theme-accent: #c9564e;
+  --theme-code-inline-bg: #1e1e1e;
+  --theme-code-inline-text: #bbb;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+@supports (scrollbar-gutter: stable) {
+  html {
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 body {
-	font-family: var(--font-atkinson);
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+  margin: 0;
+  font-family: var(--font-family-serif);
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: var(--background-body);
+  color: var(--text-main);
 }
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
-}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
-a {
-	color: var(--accent);
-}
-a:hover {
-	color: var(--accent);
-}
-p {
-	margin-bottom: 1em;
-}
-.prose p {
-	margin-bottom: 2em;
-}
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
-}
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
+  font-family: var(--font-family-sans);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 0.5em 0;
 }
 
-.sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
-	white-space: nowrap;
+h1 {
+  font-family: var(--font-family-serif);
+  font-weight: 400;
+  font-size: 4em;
+  margin: 0 0 1em 0;
+}
+
+h2 {
+  margin: 1.8em 0 0.4em 0;
+  font-size: 1.3em;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.12em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.4em;
+}
+
+h5 {
+  font-size: 1.3em;
+}
+
+h6 {
+  font-size: 1.2em;
+}
+
+p,
+ul,
+ol {
+  font-size: 1.3rem;
+  line-height: 1.75em;
+  margin: 1.2em 0;
+}
+
+ol,
+ul {
+  padding-left: 2rem;
+  -webkit-padding-start: 5%;
+  -webkit-padding-end: 5%;
+}
+
+li {
+  margin: 1rem 0;
+}
+
+li p {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  transition: color linear 0.15s;
+}
+
+a:visited {
+  color: var(--visited);
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+hr {
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  height: 0;
+  margin: 2.6em auto;
+}
+
+:root.theme-dark hr {
+  border-top-color: #555;
+}
+
+code {
+  font-family: var(--font-family-mono);
+  font-size: 0.9em;
+  font-weight: 500;
+  color: var(--text-main);
+  background: transparent;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+pre {
+  border-radius: 8px !important;
+  margin: 1.2em 0 !important;
+  padding: 1.2em;
+}
+
+pre code {
+  padding: 0;
+}
+
+blockquote {
+  border-left: 3px solid var(--line);
+  color: var(--text-secondary);
+  font-size: 1.25em;
+  font-style: italic;
+  margin: 2rem 0;
+  padding-left: 1.6rem;
+  padding-right: 2rem;
+}
+
+blockquote p {
+  padding-bottom: 6px;
+}
+
+blockquote footer {
+  font-size: 1.1rem;
+  text-align: right;
+}
+
+figure {
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  margin: 0 0 3em 0;
+}
+
+table {
+  border-collapse: collapse;
+  font-family: var(--font-family-sans);
+  font-size: 1.125em;
+  margin: 2em 0;
+}
+
+th {
+  border-bottom: 2px solid #cccccc;
+  padding: 0.4em 0.8em;
+  word-break: break-word;
+}
+
+td {
+  padding: 0.4em 0.8em;
+  word-break: break-word;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 42em;
+  width: 100%;
+}
+
+.content h1 {
+  font-size: 3em;
+  margin: 1em 0;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  padding: 0.33em 0.67em;
+  padding-top: 8px;
+  margin-left: 10px;
+  gap: 0.6em;
+  border-radius: 99em;
+  background-color: var(--theme-code-inline-bg);
+}
+
+.theme-toggle > label:focus-within {
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 0.08em var(--theme-accent), 0 0 0 0.12em white;
+}
+
+.theme-toggle > label {
+  color: var(--theme-code-inline-text);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.theme-toggle .checked {
+  color: var(--theme-accent);
+  opacity: 1;
+}
+
+input[name='theme-toggle'] {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+@media (max-width: 1020px) {
+  h1 {
+    font-size: 3em;
+  }
+
+  .content h1 {
+    font-size: 2.4em;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  p,
+  ul,
+  ol {
+    font-size: 1.2rem;
+    margin: 1em 0;
+  }
 }
