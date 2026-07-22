@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Colophon — Turbulent Priest';
+const description = 'The tools, template, and typefaces this site is built from — credit where it is due.';
+const permalink = `${Astro.site.href}colophon`;
+---
+
+<BaseLayout title={title} description={description} permalink={permalink}>
+  <div class="container">
+    <h1>Colophon</h1>
+
+    <p>This site stands on other people's work. A place about crediting your collaborators ought to credit its own.</p>
+
+    <h2>Built with</h2>
+    <ul>
+      <li><strong>Astro</strong> — the static-site framework the whole thing runs on. <a href="https://astro.build" target="_blank" rel="noopener">astro.build</a></li>
+      <li><strong>astro-blog-template</strong> by <strong>Maxi Ferreira</strong> — the template these bones started as, MIT-licensed, then re-dressed in the house style. <a href="https://github.com/Charca/astro-blog-template" target="_blank" rel="noopener">github.com/Charca/astro-blog-template</a></li>
+      <li><strong>Buttondown</strong> — sends <em>The Heretics' Almanac</em>. <a href="https://buttondown.com" target="_blank" rel="noopener">buttondown.com</a></li>
+      <li><strong>Cloudflare Pages</strong> — builds and serves every page, worldwide. <a href="https://pages.cloudflare.com" target="_blank" rel="noopener">pages.cloudflare.com</a></li>
+    </ul>
+
+    <h2>Set in</h2>
+    <ul>
+      <li><strong>Graublau Web</strong> (Georg Seifert) — the sans, for the masthead and furniture.</li>
+      <li><strong>Hoefler Text</strong>, falling back to Georgia — the serif reading face.</li>
+      <li><strong>Fira Mono</strong> (Carrois Apostrophe, for Mozilla) — code.</li>
+    </ul>
+
+    <hr />
+
+    <p><em>And made with named AI collaborators, whose hands are credited on the work itself — not hidden in a footer.</em></p>
+  </div>
+</BaseLayout>
