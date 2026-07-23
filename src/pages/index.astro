@@ -8,24 +8,33 @@ const permalink = Astro.site.href;
 
 <BaseLayout title={title} description={description} permalink={permalink}>
   <div class="home">
-    <h1>The philosophy is the work.</h1>
-    <p class="lede">
-      Applied-AI writing — the questions the roadmaps skip. Epistemology, ethics,
-      craft, and consequences, from a turbulent priest with a keyboard.
-    </p>
-    <p class="home-links">
-      <a href="/blog">Read the writing &rarr;</a>
-    </p>
+    <div class="home-text">
+      <h1>The philosophy is the work.</h1>
+      <p class="lede">
+        Applied-AI writing — the questions the roadmaps skip. Epistemology, ethics,
+        craft, and consequences, from a turbulent priest with a keyboard.
+      </p>
+      <p class="home-links">
+        <a href="/blog">Read the writing &rarr;</a>
+      </p>
+    </div>
+    <img class="home-glyph" src="/tp-dagger.png" alt="A hand-sketched dagger whose crossguard forms a cross" />
   </div>
 </BaseLayout>
 
 <style>
   .home {
     flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
     width: 100%;
-    max-width: 42em;
+    max-width: 58em;
     margin: 0 auto;
     padding: 3rem 0 2rem;
+  }
+  .home-text {
+    max-width: 42em;
   }
   .home h1 {
     margin-bottom: 0.5rem;
@@ -44,10 +53,24 @@ const permalink = Astro.site.href;
   .home-links a {
     text-decoration: none;
   }
+  .home-glyph {
+    width: 320px;
+    max-width: 34%;
+    height: auto;
+    flex-shrink: 0;
+  }
 
   @media (max-width: 800px) {
+    .home {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
     .home h1 {
       font-size: 2.6em;
+    }
+    .home-glyph {
+      max-width: 60%;
+      width: 260px;
     }
   }
 </style>
