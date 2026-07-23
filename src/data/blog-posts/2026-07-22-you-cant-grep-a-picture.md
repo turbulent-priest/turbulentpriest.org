@@ -1,7 +1,7 @@
 ---
 title: "You can't grep a picture"
 slug: you-cant-grep-a-picture
-publishDate: 22 Jul 2026
+publishDate: "2026-07-22"
 description: "Choose to read documents as pixels and you foreclose every text-level defense in advance — including the OCR you reach for to fix it."
 ---
 
