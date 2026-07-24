@@ -2,9 +2,18 @@
   <span>
     &copy; {new Date().getFullYear()} Turbulent Priest &middot;
     <a href="/colophon">Colophon</a> &middot;
+    <a class="contact-link" data-user="confession" data-domain="turbulentpriest.org" href="#">Contact</a> &middot;
     <em>written with named collaborators, not autocomplete.</em>
   </span>
 </footer>
+
+<script>
+  // Assemble the mailto at runtime so the full address stays out of the static HTML (spam-harvest resistance).
+  document.querySelectorAll('a.contact-link').forEach((a) => {
+    const el = a as HTMLAnchorElement;
+    el.href = `mailto:${el.dataset.user}@${el.dataset.domain}`;
+  });
+</script>
 
 <style>
   footer {
