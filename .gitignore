@@ -22,3 +22,4 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 TODO.md
+src/data/blog-posts/2020-01-01-markdown-style-guide.md

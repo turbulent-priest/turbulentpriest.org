@@ -78,33 +78,33 @@ h1 {
 
 h2 {
   margin: 1.8em 0 0.4em 0;
-  font-size: 1.3em;
+  font-size: 1.6em;
   color: var(--text-main);
   border-bottom: 1px solid var(--line);
   padding-bottom: 0.12em;
 }
 
 h3 {
-  font-size: 1.5em;
-}
-
-h4 {
-  font-size: 1.4em;
-}
-
-h5 {
   font-size: 1.3em;
 }
 
+h4 {
+  font-size: 1.15em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
 h6 {
-  font-size: 1.2em;
+  font-size: 0.9em;
 }
 
 p,
 ul,
 ol {
   font-size: 1.3rem;
-  line-height: 1.75em;
+  line-height: 1.5;
   margin: 1.2em 0;
 }
 
@@ -116,12 +116,61 @@ ul {
 }
 
 li {
-  margin: 1rem 0;
+  margin: 0.3rem 0;
+}
+
+/* A nested list sits snug under its parent item, not floated 1.2em away. */
+li ul,
+li ol {
+  margin: 0.3rem 0;
 }
 
 li p {
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
+}
+
+/* Emphasis never renders as bold serif — it becomes the sans accent mark. */
+strong,
+b {
+  font-family: var(--font-family-sans);
+  font-weight: 700;
+  color: var(--primary-color);
+  font-size: 0.85em;
+}
+
+/* Footnote reference marks: sans, 15% smaller, bold. */
+[data-footnote-ref] {
+  font-family: var(--font-family-sans);
+  font-size: 0.85em;
+  font-weight: 700;
+}
+
+/* Superscripts must not inflate the line box (which breaks vertical rhythm) —
+   lift with positioning, not vertical-align, and zero the line-height. */
+sup {
+  line-height: 0;
+  position: relative;
+  top: -0.5em;
+  vertical-align: baseline;
+}
+
+/* Footnote body text: Graublau sans, normal weight, stepped down from body size. */
+.footnotes,
+[data-footnotes] {
+  font-family: var(--font-family-sans);
+  font-weight: 400;
+}
+.footnotes li,
+.footnotes p,
+[data-footnotes] li,
+[data-footnotes] p {
+  font-size: 1rem;
+}
+/* Tighten the gap between footnote entries by half (1rem -> 0.5rem). */
+.footnotes li,
+[data-footnotes] li {
+  margin: 0.5rem 0;
 }
 
 a {
@@ -157,13 +206,15 @@ hr {
   border-top-color: #555;
 }
 
+/* Inline code: inverted chip (white-on-black in light, auto-inverts in dark), 20% smaller. */
 code {
   font-family: var(--font-family-mono);
-  font-size: 0.9em;
+  font-size: 0.72em;
   font-weight: 500;
-  color: var(--text-main);
-  background: transparent;
-  padding: 0;
+  color: var(--background-body);
+  background: var(--text-main);
+  padding: 0.12em 0.4em;
+  border-radius: 3px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -174,18 +225,35 @@ pre {
   padding: 1.2em;
 }
 
+/* Code blocks keep the syntax-theme background — reset the inline chip. */
 pre code {
   padding: 0;
+  background: transparent;
+  border-radius: 0;
+  font-size: 0.9em;
+}
+
+/* Keyboard keys: sans, code-chip size, accent background, extra-rounded. */
+kbd {
+  font-family: var(--font-family-sans);
+  font-size: 0.72em;
+  font-weight: 500;
+  color: #fff;
+  background: var(--primary-color);
+  padding: 0.15em 0.5em;
+  border-radius: 6px;
 }
 
 blockquote {
-  border-left: 3px solid var(--line);
-  color: var(--text-secondary);
+  background: rgba(128, 128, 128, 0.08);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: var(--font-family-sans);
   font-size: 1.25em;
-  font-style: italic;
+  font-style: normal;
+  font-weight: 400;
   margin: 2rem 0;
-  padding-left: 1.6rem;
-  padding-right: 2rem;
+  padding: 1.4rem 1.6rem;
 }
 
 blockquote p {
@@ -300,4 +368,28 @@ input[name='theme-toggle'] {
     font-size: 1.2rem;
     margin: 1em 0;
   }
+}
+
+/* Site logo (nav wordmark image) — theme-swapped colour variants. */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.15s;
+}
+.logo:hover {
+  opacity: 0.8;
+}
+.logo-img {
+  height: 2rem;
+  width: auto;
+  display: block;
+}
+.logo-dark {
+  display: none;
+}
+html.theme-dark .logo-light {
+  display: none;
+}
+html.theme-dark .logo-dark {
+  display: block;
 }

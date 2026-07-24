@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content'
 import readingTime from 'reading-time'
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Bio from '../../components/Bio.astro';
+import Lightbox from '../../components/Lightbox.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('posts')
@@ -15,11 +16,11 @@ export async function getStaticPaths() {
 const { post } = Astro.props
 const { title, slug, description, publishDate } = post.data;
 const readingTimeEstimate = readingTime(post.body).text
-const permalink = `${Astro.site.href}blog/${slug}`;
+const permalink = `${Astro.site.href}writing/${slug}`;
 const { Content } = await render(post)
 ---
 
-<BaseLayout title={title} description={description} permalink={permalink} current="blog">
+<BaseLayout title={title} description={description} permalink={permalink} current="writing">
   <header>
     <p>{publishDate} ~ {readingTimeEstimate}</p>
     <h1>{title}</h1>
@@ -32,6 +33,7 @@ const { Content } = await render(post)
     <hr />
     <Bio />
   </div>
+  <Lightbox />
 </BaseLayout>
 
 <style>
@@ -44,10 +46,10 @@ const { Content } = await render(post)
   }
 
   header p {
-    color: var(--text-secondary);
+    color: var(--text-main);
     text-transform: uppercase;
     font-family: var(--font-family-sans);
-    font-weight: 600;
+    font-weight: 400;
   }
 
   header hr {

@@ -1,0 +1,78 @@
+---
+// Click-to-zoom for content images. Vanilla JS, no library.
+// Scoped to `.content img` so the nav/logo/hero are never affected.
+// Re-inits on astro:page-load so it survives ClientRouter view transitions.
+---
+<div class="lightbox" id="lightbox" role="dialog" aria-hidden="true" aria-label="Enlarged image">
+  <img class="lightbox-img" src="" alt="" />
+</div>
+
+<style>
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.88);
+    cursor: zoom-out;
+  }
+  .lightbox.open {
+    display: flex;
+  }
+  .lightbox-img {
+    max-width: 92vw;
+    max-height: 92vh;
+    border-radius: 4px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+  }
+  :global(.content img) {
+    cursor: zoom-in;
+  }
+</style>
+
+<script>
+  function initLightbox() {
+    const box = document.getElementById('lightbox');
+    if (!box) return;
+    const boxImg = box.querySelector('.lightbox-img');
+
+    const close = () => {
+      box.classList.remove('open');
+      box.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      boxImg.setAttribute('src', '');
+    };
+
+    // Assignment (not addEventListener) keeps this idempotent across re-inits.
+    box.onclick = close;
+
+    document.querySelectorAll('.content img').forEach((el) => {
+      el.onclick = () => {
+        boxImg.setAttribute('src', el.currentSrc || el.src);
+        boxImg.setAttribute('alt', el.getAttribute('alt') || '');
+        box.classList.add('open');
+        box.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+    });
+
+    // Global Escape handler — bound once for the page lifetime.
+    if (!window.__lightboxKeyBound) {
+      window.__lightboxKeyBound = true;
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        const b = document.getElementById('lightbox');
+        if (b) {
+          b.classList.remove('open');
+          b.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+  }
+
+  document.addEventListener('astro:page-load', initLightbox);
+</script>
